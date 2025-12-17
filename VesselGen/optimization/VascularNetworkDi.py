@@ -1050,6 +1050,7 @@ class VascularNetwork:
         node1, node2 = edge
         return (4 * self.mu * self.tree[node1][node2]['flow']) / (np.pi * self.tree[node1][node2]['radius'] ** 3)
 
+
     def remove_intermediate(self):
         max_orders = np.max(np.array([self.tree.nodes[n]['level'] for n in self.tree.nodes]))
         root = [n for n in self.tree.nodes if self.tree.nodes[n]['root']]
@@ -1062,14 +1063,20 @@ class VascularNetwork:
                 left = list(self.tree.predecessors(n))[0]
                 right = neighbors[0]
                 
-                r = np.mean([self.tree[left][n]['radius'], self.tree[n][right]['radius']])
-                
+                # r = np.mean([self.tree[left][n]['radius'], self.tree[n][right]['radius']])
 
-                self.add_vessel(left, right, radius=r, flow=self.tree[left][right]['flow'])
+                edge_feature = {}
+                for key in self.tree[left][n].keys():
+                    edge_feature[key] = self.tree[left][n][key]
+
+                self.tree.add_edge(left, right, **edge_feature)
 
                 self.tree.remove_node(n)
 
-        return
+                # self.add_vessel(left, right, radius=r, flow=self.tree[left][right]['flow'])
+
+                # self.tree.remove_node(n)
+
 
     def update_HS_order(self, mode='level'):
         for n in self.tree.nodes:

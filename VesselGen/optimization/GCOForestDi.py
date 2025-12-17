@@ -112,9 +112,9 @@ class GCOForest(GCO):
 
         self.VN.remove_intermediate()
         self.save_results(lab='inter_removed')
-        self.VN.save_vtk(os.path.join(self.work_dir, f'Final merged inter_removed.vtk'))
+        self.VN.save_vtk(os.path.join(self.work_dir, f'final.vtk'))
 
-        self.final_save_vtk(file='final.vtk', lab='inter_removed')
+        # self.final_save_vtk(file='final.vtk', lab='inter_removed')
 
 
 if __name__ == '__main__':
@@ -122,7 +122,7 @@ if __name__ == '__main__':
 
     f_coords, new_edge_list, no_branch = [], [], [] # these are only needed if no vtk files exist
 
-    n_outer_loop = 35
+    # n_outer_loop = 1
     merge_threshold = 0.15
 
     vsize = 22.6
