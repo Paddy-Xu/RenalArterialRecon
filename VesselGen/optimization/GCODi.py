@@ -898,7 +898,7 @@ class GCO:
 
             temp2 = np.array(
                 [testRadius[i] ** 4 / (self.vsize * np.linalg.norm(opt_point_loc - neighbor_leaf_locs[i]))
-                 for i in range(len(opt_point_loc))])
+                 for i in range(len(neighbor_leaf_locs))])
             temp2 = 1 / np.sum(temp2) + self.vsize * l0 / r0 ** 4
 
             temp2 *= self.w2

@@ -339,7 +339,7 @@ class VascularNetwork:
                             leaf_num = len([n for n in neighbors if not self.tree.nodes[n]['fixed']])
                             r_leaf = np.power(r_leaf / leaf_num, 1 / 3)
                             for n in neighbors:
-                                if not self.tree[n]['fixed']:
+                                if not self.tree.nodes[n]['fixed']:
                                     self.tree[node][n]['radius'] = r_leaf
 
     def rescale_fixed_radius(self, mode='level'):

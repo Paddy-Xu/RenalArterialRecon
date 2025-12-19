@@ -1,14 +1,8 @@
 import sys
 
-import matplotlib.pyplot as plt
-
-import nibabel as nib
 import numpy as np
-from scipy.ndimage import label
-from skimage import measure
 import os
 import networkx as nx
-import copy
 import pyvista
 
 class VtkNetwork:
@@ -36,6 +30,8 @@ class VtkNetwork:
             node_radius = mesh.point_data['node_radius']
         elif 'radius' in mesh.cell_data:
             node_radius = None
+        else:
+            raise ValueError('No radius information found in the vtk file.')
 
         self.tree = nx.Graph()
 
@@ -149,7 +145,7 @@ class VtkNetwork:
             else:
                 root_idx = np.argmax(neighbor_orders)
 
-            depth = 1 + max([self.get_depth(self.tree, i) for i in neighbors if i != neighbors[root_idx]])
+            depth = 1 + max([self.get_depth(i) for i in neighbors if i != neighbors[root_idx]])
             self.tree.nodes[root]['depth'] = depth
             return depth
 

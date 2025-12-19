@@ -2,9 +2,6 @@ from pygel3d import hmesh
 from utils import *
 from center_points import CenterPoints
 import numpy as np
-from scipy.stats import norm
-import matplotlib.pyplot as plt
-from pygel3d import hmesh, gl_display as gl
 
 
 if __name__ == '__main__':

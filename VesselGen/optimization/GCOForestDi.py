@@ -49,7 +49,7 @@ class GCOForest(GCO):
                         
                         pickle.dump(self, outp, pickle.HIGHEST_PROTOCOL)
 
-                diff_flag = (cost_before != cost_after)
+                diff_flag = not np.isclose(cost_before, cost_after)
                 i += 1
 
             
@@ -133,7 +133,6 @@ if __name__ == '__main__':
 
     prune_threshold, max_l = 8, 2
     prune_mode = 'level'
-    optimizer = GD_Optimizer
     use_C = False
     cost_mode = 'PC'
     optimize_r = False
@@ -159,6 +158,8 @@ if __name__ == '__main__':
 
     n_inner_loop, too_few_prune = 0, 0
 
+    if len(r_coords) == 0:
+        raise ValueError("random_points_file contains no points.")
     t_flow, mu = 1.167e11/len(r_coords), 3.6e-15
 
     optimizer = GD_OptimizerUnit
@@ -180,4 +181,3 @@ if __name__ == '__main__':
             )
 
     g.GCO_opt()
-

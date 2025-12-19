@@ -28,6 +28,10 @@ Run the following command for installation of the project
 # From GitHub
 git clone https://github.com/diku-dk/RenalArterialRecon
 
+conda create -n VesselGen python=3.9
+conda activate VesselGen            
+
+
 pip install -e RenalArterialRecon 
 
 cd RenalArterialRecon
@@ -114,6 +118,10 @@ Specifically, to reproduce the result, run
 ```
 python optimization/GCOForestDi.py
 ``` 
+Note that the first iteration takes a very long time to run before you see results in terminal (not a bug).
+This is because the splitting process is very time-consuming when there is a single node that are 
+connected to all terminals (as it should in the first iteration).
+
 To make use of the extracted image priors, you will need to provide ```GCOForestDi.py```  a prebuilt tree, 
 as well as the sampled leaf nodes in the estimated cortex, both given in ```.vtk``` format. 
 Both will be read into ```numpy arrays``` by ```pyvista```.

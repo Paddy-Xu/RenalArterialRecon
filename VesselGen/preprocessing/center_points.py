@@ -86,13 +86,27 @@ class CenterPoints:
 
         self.disconnected_indices = disconnected_indices
 
+    # def remove_duplicate_branch(self):
+    #     sets = [set(i) for i in (list(self.global_dict.values()))]
+    #     for i in range(len(sets)):
+    #         for j in range(i + 1, len(sets)):
+    #             if sets[i] == sets[j]:
+    #                 self.duplicate_branch.append(sets[i])
+    #                 self.global_dict.pop(j, None)
+
     def remove_duplicate_branch(self):
-        sets = [set(i) for i in (list(self.global_dict.values()))]
-        for i in range(len(sets)):
-            for j in range(i + 1, len(sets)):
-                if sets[i] == sets[j]:
-                    self.duplicate_branch.append(sets[i])
-                    self.global_dict.pop(j, None)
+        keys = list(self.global_dict.keys())
+        for i, key_i in enumerate(keys):
+            if key_i not in self.global_dict:
+                continue
+            set_i = set(self.global_dict[key_i])
+            for key_j in keys[i + 1:]:
+                if key_j not in self.global_dict:
+                    continue
+                if set_i == set(self.global_dict[key_j]):
+                    self.duplicate_branch.append(set_i)
+                    self.global_dict.pop(key_j, None)
+
 
     def set_adj_list(self):
         connectivity = []
@@ -157,7 +171,11 @@ class CenterPoints:
         with open(root, 'w') as file:
             json.dump(self.global_dict, file, separators=(',', ':'), indent=10)
 
-    def label_branch(self, i, branch_id, visited=set(), incoming_node=None, cur_path=[]):
+    def label_branch(self, i, branch_id, visited=None, incoming_node=None, cur_path=None):
+        if visited is None:
+            visited = set()
+        if cur_path is None:
+            cur_path = []
 
         
 
@@ -637,4 +655,3 @@ if __name__ == '__main__':
     m = hmesh.load(file)
     a = pygel3d.gl_display.Viewer()
     a.display(m)
-

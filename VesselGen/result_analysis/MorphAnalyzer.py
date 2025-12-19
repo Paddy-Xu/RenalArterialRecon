@@ -1,6 +1,4 @@
 
-from scipy.stats import norm
-
 from VesselGen.result_analysis.simulate_fow_pressure import *
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
@@ -9,8 +7,6 @@ import scipy
 import os
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import rcParams
-rcParams.update({'figure.autolayout': True})
 
 
 class VtkMorphAnalyer(VtkNetworkAnalysis):
@@ -640,4 +636,3 @@ if __name__ == '__main__':
     # plt.savefig("sub_tree.pdf", format="pdf", bbox_inches="tight")
     plt.show()
     vt.save(save_file)
-

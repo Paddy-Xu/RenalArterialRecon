@@ -15,12 +15,13 @@ seaborn
 mayavi
 PyQt5
 SimpleITK
+PyGEL3D
 ## conda install -c vmtk vtk itk vmtk
 ## conda install llvm=3.3
 
-meshplot
-open3d
-meshio
+# meshplot
+# open3d
+# meshio
 
 ## conda install wildmeshing
 ## conda install -c conda-forge igl

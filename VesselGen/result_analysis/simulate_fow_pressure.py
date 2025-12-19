@@ -7,7 +7,7 @@ import seaborn as sns
 import pandas as pd
 import networkx as nx
 import pyvista
-from VesselGen.utils.graph_modelling import *
+# from VesselGen.utils.graph_modelling import *
 from collections import OrderedDict
 from VesselGen.preprocessing.read_to_networkx import VtkNetwork
 from matplotlib import rcParams
@@ -75,12 +75,12 @@ class VtkNetworkAnalysis(VtkNetwork):
 
         all_nodes = [i for i in self.tree.nodes]
 
-        if 'level' in self.tree[all_nodes[0]]:
+        if 'level' in self.tree.nodes[all_nodes[0]]:
             all_levels = np.array([self.tree.nodes[i]['level'] for i in all_nodes])
             if -1 in all_levels:
                 root_idx = np.where(all_levels == -1)[0][0]
             else:
-                rooot_idx = np.argmax(all_levels)
+                root_idx = np.argmax(all_levels)
 
             self.root = all_nodes[root_idx]
 
@@ -179,7 +179,7 @@ if __name__ == '__main__':
 
     root_loc = [588, 217, 650]
 
-    pt_file = 'result.vtk'
+    pt_file = '/Users/jpz195/PycharmProjects/RenalArterialRecon/VesselGen/optimization/1/Final merged_11_hs.vtk'
 
     save_file = pt_file[:-4] + '_w_pressure.vtk'
 

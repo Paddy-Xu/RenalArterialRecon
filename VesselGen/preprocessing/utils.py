@@ -17,8 +17,7 @@ def marching_cubes(res, name='vessel', level=1, spacing=(0.3, 0.3, 0.3), gradien
     mcubes.export_obj(verts-offset, faces, name+'.obj')
 
 def safe_mkdir(p):
-    if not os.path.exists(p):
-        os.mkdir(p)
+    os.makedirs(p, exist_ok=True)
 
 def max_projection(img, axis=0):
     return np.max(img, axis=axis)
@@ -149,6 +148,5 @@ def ccd_largest_part(img):
     res = res.astype('uint8')
 
     return res
-
 
 

@@ -2,14 +2,10 @@ import sys
 
 import nibabel as nib
 import numpy as np
-import os
-root_folder = os.getcwd()
-
-
 from skimage.morphology import ball
 import scipy.ndimage as nd
 
-def binary_erode_label(img, radius=1, bg_val=0):
+def binary_erode_label(img, radius=1):
 
     img = img.astype(np.uint8)
 
@@ -102,7 +98,7 @@ if __name__ == '__main__':
     label_data = label.get_fdata().astype('uint8')
     affine = label.affine
 
-    res = label - binary_erode_label(label, radius)
+    res = label_data - binary_erode_label(label_data, radius)
     res = res.astype('uint8')
 
     mask = filter_label_from_root(label.shape, [root_loc[1], root_loc[0], root_loc[2]], dist)

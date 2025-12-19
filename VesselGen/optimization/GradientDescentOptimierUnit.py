@@ -5,10 +5,7 @@ Description: Given a bifurcation, finds the optimal position of the branching po
     and the optimal radii.
 """
 
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-import scipy
 from scipy.optimize import minimize
 
 class GD_OptimizerUnit:
@@ -111,17 +108,4 @@ class GD_OptimizerUnit:
         """
 
         return max(0, testRadius[k] - self.max_r) ** 2 + max(0, self.min_r - testRadius[k]) ** 2
-
-
-    def get_radius_range(self):
-        return np.max(self.testRadii[self.count]) - np.min(self.testRadii[self.count])
-        return self.radius_range
-
-    def get_loc_range(self):
-
-        return np.max(self.testMedians[self.count]) - np.min(self.testMedians[self.count])
-        return self.loc_range
-
-    def get_first_r(self, testRadius):
-        return ((np.sum(testRadius ** self.c) - testRadius[0] ** self.c)) ** (1 / self.c)
 
